@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MG Eventos - House Party</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      color: gold;
+      font-family: Arial, sans-serif;
+    }
+    header {
+      text-align: center;
+      padding: 20px;
+    }
+    header img {
+      width: 100px;
+    }
+    h1 {
+      margin: 10px 0 0;
+    }
+    h2 {
+      margin: 5px 0 20px;
+      font-size: 1em;
+      color: #ccc;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px;
+    }
+    button {
+      background: #333;
+      color: gold;
+      border: 1px solid purple;
+      border-radius: 5px;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+    section {
+      display: none;
+      padding: 20px;
+    }
+    .active {
+      display: block;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      background: #111;
+      color: gold;
+      border: 1px solid purple;
+      border-radius: 5px;
+    }
+    #map {
+      width: 100%;
+      height: 300px;
+      border: 1px solid purple;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://i.imgur.com/6nFrlm6.jpeg" alt="Logo MG Eventos" />
+    <h1>MG Eventos - House Party</h1>
+    <h2>Eventos únicos</h2>
+  </header>
+
+  <audio id="musica" controls autoplay loop>
+    <source src="https://audio.jukehost.co.uk/vXZeoTJJt1O3cKJ26tS3P7zYJDm678up" type="audio/mpeg">
+    Tu navegador no soporta audio.
+  </audio>
+
+  <nav>
+    <button onclick="mostrar('agenda')">Agenda</button>
+    <button onclick="mostrar('invitados')">Invitados</button>
+    <button onclick="mostrar('salon')">Información del Salón</button>
+    <button onclick="mostrar('reserva')">Reservas</button>
+    <button onclick="mostrar('pagos')">Pagos</button>
+    <button onclick="mostrar('chat')">Chat</button>
+    <button onclick="mostrar('encuesta')">Encuesta</button>
+    <button onclick="mostrar('redes')">Redes Sociales</button>
+  </nav>
+
+  <section id="agenda">
+    <h3>Agenda del Evento</h3>
+    <p>Horario: Lunes a Domingos de 10:00 a 22:00 hs.</p>
+    <ul>
+      <li>Miércoles - 18:00 hs: Clases de Bachata</li>
+      <li>Viernes - 20:00 hs: Fiesta temática</li>
+    </ul>
+    <textarea placeholder="Anotá tus actividades..."></textarea>
+  </section>
+
+  <section id="invitados">
+    <h3>Gestión de Invitados</h3>
+    <input type="text" placeholder="Nombre y Apellido" />
+    <button>Agregar Invitado</button>
+    <div id="lista-invitados"></div>
+  </section>
+
+  <section id="salon">
+    <h3>Información del Salón</h3>
+    <p>Dirección: Anatole France 1509, Lanús Este</p>
+    <div id="map"></div>
+  </section>
+
+  <section id="reserva">
+    <h3>Reservas</h3>
+    <input type="text" placeholder="Nombre y Apellido" />
+    <input type="number" placeholder="Edad" />
+    <input type="tel" placeholder="Teléfono" />
+    <input type="date" />
+    <input type="time" />
+    <textarea placeholder="Anotaciones"></textarea>
+    <button>Enviar Reserva</button>
+  </section>
+
+  <section id="pagos">
+    <h3>Pagos</h3>
+    <label>Elegí tu forma de pago:</label>
+    <select>
+      <option>Tarjeta de Crédito</option>
+      <option>Tarjeta de Débito</option>
+      <option>Transferencia</option>
+      <option>Pago Fácil</option>
+      <option>Mercado Pago</option>
+    </select>
+  </section>
+
+  <section id="chat">
+    <h3>Chat en Tiempo Real</h3>
+    <textarea placeholder="Escribí tu mensaje..."></textarea>
+    <button>Enviar</button>
+  </section>
+
+  <section id="encuesta">
+    <h3>Encuesta</h3>
+    <label>¿Cómo calificarías el evento?</label>
+    <select>
+      <option>Muy Bueno</option>
+      <option>Bueno</option>
+      <option>Regular</option>
+      <option>Malo</option>
+    </select>
+    <textarea placeholder="Comentarios"></textarea>
+  </section>
+
+  <section id="redes">
+    <h3>Redes Sociales</h3>
+    <ul>
+      <li><a href="https://www.instagram.com/mg.eventos.party/?hl=es" target="_blank">Instagram</a></li>
+      <li><a href="https://www.youtube.com/@mgeventospartyhouse" target="_blank">YouTube</a></li>
+      <li><a href="https://sites.google.com/view/mgeventos" target="_blank">Sitio Web</a></li>
+      <li><a href="https://wa.me/5491136925636" target="_blank">WhatsApp (Nancy)</a></li>
+    </ul>
+  </section>
+
+  <script>
+    function mostrar(id) {
+      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    function initMap() {
+      const ubicacion = { lat: -34.70411524777551, lng: -58.38512285974886 };
+      const mapa = new google.maps.Map(document.getElementById('map'), {
+        zoom: 16,
+        center: ubicacion
+      });
+      new google.maps.Marker({
+        position: ubicacion,
+        map: mapa,
+        title: "MG Eventos"
+      });
+    }
+  </script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARsn5RjbhYRB6owRw-shvNXY4_GWfIg_Y&callback=initMap"></script>
+</body>
+</html>
